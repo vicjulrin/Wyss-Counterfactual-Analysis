@@ -11,6 +11,12 @@ This document describes the workflow used to analyze the effectiveness of differ
 
 The functions required to run this reproducible workflow are stored in the `functions/` folder, and the example input data are stored in the `inputs/` folder. The script keeps these functions outside the main workflow so that the analysis can be read step by step.
 
+## Citation And DOI
+
+Citation metadata are provided in `CITATION.cff`, and Zenodo metadata are provided in `.zenodo.json`. A DOI should be generated from a GitHub release archived by Zenodo. After Zenodo archives the release, replace this line with the DOI badge and citation exported by Zenodo.
+
+Current DOI status: pending Zenodo release archive.
+
 The main helper functions are:
 
 - `multicol_analysis`: checks whether the candidate covariates are highly correlated or aliased, and returns a smaller set of variables for modeling.

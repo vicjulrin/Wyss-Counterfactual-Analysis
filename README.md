@@ -3,6 +3,7 @@ Deforestation analysis Peruvian Amazonia
 
 Wyss Academy
 
+- [Citation And DOI](#citation-and-doi)
 - [Environment](#environment)
 - [Inputs](#inputs)
 - [Prepare Variables](#prepare-variables)
@@ -19,6 +20,12 @@ Wyss Academy
 This document describes the workflow used to analyze the effectiveness of different governance types in Peru, following the study available at <https://doi.org/10.21203/rs.3.rs-4170734/v1>. The workflow is executable with a sample of the full dataset for one governance type: mining concessions. To obtain the complete dataset, please contact the authors.
 
 The functions required to run this reproducible workflow are stored in the `functions/` folder, and the example input data are stored in the `inputs/` folder. The script keeps these functions outside the main workflow so that the analysis can be read step by step.
+
+## Citation And DOI
+
+Citation metadata are provided in `CITATION.cff`, and Zenodo metadata are provided in `.zenodo.json`. A DOI should be generated from a GitHub release archived by Zenodo. After Zenodo archives the release, replace this line with the DOI badge and citation exported by Zenodo.
+
+Current DOI status: pending Zenodo release archive.
 
 The main helper functions are:
 

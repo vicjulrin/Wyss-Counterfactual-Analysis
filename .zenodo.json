@@ -1,0 +1,19 @@
+{
+  "title": "Deforestation analysis Peruvian Amazonia",
+  "creators": [
+    {
+      "name": "Wyss Academy"
+    }
+  ],
+  "description": "Reproducible workflow for a counterfactual matching analysis of mining concessions and forest outcomes in the Peruvian Amazonia.",
+  "license": "MIT",
+  "keywords": [
+    "deforestation",
+    "counterfactual matching",
+    "Peru",
+    "Amazonia",
+    "mining concessions"
+  ],
+  "upload_type": "software",
+  "access_right": "open"
+}

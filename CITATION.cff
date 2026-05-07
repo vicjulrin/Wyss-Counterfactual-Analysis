@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this reproducible workflow, please cite it using the metadata below."
+type: software
+title: "Deforestation analysis Peruvian Amazonia"
+authors:
+  - name: "Wyss Academy"
+version: "1.0.0"
+date-released: "2026-05-07"
+license: MIT
+repository-code: "https://github.com/vicjulrin/Wyss-Counterfactual-Analysis"
+abstract: "Reproducible workflow for a counterfactual matching analysis of mining concessions and forest outcomes in the Peruvian Amazonia."
+keywords:
+  - deforestation
+  - counterfactual matching
+  - Peru
+  - Amazonia
+  - mining concessions
