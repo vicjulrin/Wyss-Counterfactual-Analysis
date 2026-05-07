@@ -9,7 +9,18 @@ output:
 
 This document describes the workflow used to analyze the effectiveness of different governance types in Peru, following the study available at <https://doi.org/10.21203/rs.3.rs-4170734/v1>. The workflow is executable with a sample of the full dataset for one governance type: mining concessions. To obtain the complete dataset, please contact the authors.
 
-The functions required to run this reproducible workflow are stored in the `functions/` folder, and the example input data are stored in the `inputs/` folder.
+The functions required to run this reproducible workflow are stored in the `functions/` folder, and the example input data are stored in the `inputs/` folder. The script keeps these functions outside the main workflow so that the analysis can be read step by step.
+
+The main helper functions are:
+
+- `multicol_analysis`: checks whether the candidate covariates are highly correlated or aliased, and returns a smaller set of variables for modeling.
+- `bestmodels_test`: compares candidate treatment models and selects the best-ranked covariate set.
+- `reduce_autocor_by_distance`: checks spatial autocorrelation in the treatment model residuals and iteratively removes locally autocorrelated pixels until the global pattern is reduced.
+- `moran_by_distance`: computes the global Moran's I statistic for model residuals at a given distance.
+- `moran_plot`: compares global spatial autocorrelation before and after the spatial pruning step.
+- `counterfactual_function`: runs the counterfactual matching internally with `MatchIt::matchit`, matching treated pixels to comparable control pixels using the selected covariates.
+- `effectivenes_analysis_glm`: estimates treatment-control differences after matching, using binomial models for forest loss and Gaussian models for continuous outcomes such as carbon emissions.
+- `make_change_plot`: builds the bar plots that combine observed changes, confidence intervals, and model-based estimates.
 
 ```{r setup, include=FALSE}
 getExportedValue(paste0("kni", "tr"), "opts_chunk")$set(
@@ -68,6 +79,8 @@ invisible(lapply(packages_list, library, character.only = TRUE))
 
 The reproducible example uses the mining concessions sample stored in `inputs/data_MC.rds`. The response variable is `MC`, where treated pixels belong to mining concessions and control pixels do not.
 
+This block defines the columns used throughout the workflow. `Forest2005` and `Forest2021` are used to measure forest loss, while `Carbon2005` and `Carbon2021` are used to measure carbon emissions. The columns `id_site` and `area_site` identify the mining concession site and its area, which are needed later for the site-level analysis.
+
 ```{r inputs}
 path_data <- file.path(dir_work, "inputs", "data_MC.rds")
 path_functions <- file.path(dir_work, "functions", "functions.R")
@@ -109,6 +122,8 @@ table(data_PUID[[treatment_col]])
 
 Categorical variables are compressed into a single numeric score using the first principal component of their dummy matrix. This keeps the example compact while allowing categorical information to enter the model-selection step.
 
+The categorical variables are first converted into dummy variables with `model.matrix`. Then the first principal component summarizes the main contrast among categories. This is a compact alternative to carrying many dummy columns through every later model in the reproducible example.
+
 ```{r prepare-variables}
 covars_factor <- covars_list$factor
 
@@ -136,6 +151,8 @@ if(!is.null(covars_factor) | length(covars_factor) < 1) {
 
 The first selection step removes highly correlated or aliased covariates. Variables marked with an asterisk in the dendrogram are retained for the next stage.
 
+Here, `multicol_analysis` is used as a screening step. It receives the treatment column, the candidate covariates, and a correlation threshold. It returns the variables that can be kept without carrying strong multicollinearity into the matching model.
+
 ```{r multicollinearity}
 multicol_test <- multicol_analysis(
   data_x = data_PUID2,
@@ -160,7 +177,7 @@ fig_multicol <- save_plot(
 
 ![](figures_backup/01_multicollinearity_dendrogram.png)
 
-The second selection step compares candidate treatment models and keeps the best-ranked set of covariates according to AIC.
+The second selection step compares candidate treatment models and keeps the best-ranked set of covariates according to AIC. This is done with `bestmodels_test`, which fits alternative treatment models and ranks them. The selected variables are then used for the spatial autocorrelation check and for the matching step.
 
 ```{r model-selection}
 model_selection <- bestmodels_test(
@@ -190,6 +207,10 @@ fig_model_selection <- save_plot(
 ## Spatial Autocorrelation
 
 The treatment model is checked for residual spatial autocorrelation and then adjusted by pruning locally autocorrelated pixels within a 1 km neighborhood.
+
+The function `reduce_autocor_by_distance` does this iteratively. In each iteration, it fits a binomial treatment model, computes residuals, builds a spatial neighborhood within the chosen distance, and identifies pixels that contribute to local Moran autocorrelation. Those locally autocorrelated pixels are pruned, and the model is checked again. The process stops when the remaining data have low global Moran autocorrelation or when no further local autocorrelation is detected.
+
+After that, `moran_plot` uses `moran_by_distance` internally to summarize the global Moran's I statistic at several distances. This figure is a diagnostic: it shows whether the spatial pruning reduced residual autocorrelation not only at 1 km, but also at nearby scales such as 600 m and 5 km.
 
 ```{r spatial-autocorrelation}
 data_adjust_autocor <- reduce_autocor_by_distance(
@@ -222,6 +243,8 @@ fig_moran <- save_plot(
 ## Matching
 
 Propensity-score matching is used to select comparable treated and control pixels. The workflow then checks covariate balance and propensity-score overlap after matching.
+
+The function `counterfactual_function` is the matching wrapper. Internally, it calls `MatchIt::matchit` to estimate propensity scores and match treated pixels to control pixels with similar covariate values. The output includes the matched dataset, a balance plot, and a propensity-score overlap plot. The goal is to make the post-matching control pixels a plausible counterfactual for the treated mining concession pixels.
 
 ```{r matching}
 matching_analysis <- counterfactual_function(
@@ -259,6 +282,8 @@ fig_ps <- save_plot(
 
 After matching, the analysis keeps pixels that were forested at baseline. Forest loss and carbon emissions are then computed between 2005 and 2021.
 
+This block creates the outcome variables used in the effectiveness analysis. `deforest` is equal to 1 when a pixel was forested in 2005 and not forested in 2021. `carbon_emmisions` is the carbon stock difference between 2005 and 2021, so larger values indicate larger carbon losses.
+
 ```{r post-matching-data}
 matched_data <- matching_analysis$matched_df %>% 
   dplyr::filter(!!rlang::sym(col_forest_t1) > 0) %>% 
@@ -281,6 +306,10 @@ matched_data <- matching_analysis$matched_df %>%
 ## Pixel-Level Analysis
 
 The first post-matching analysis estimates average pixel-level forest loss and carbon emissions for treated and control pixels.
+
+The function `effectivenes_analysis_glm` summarizes the observed change in each group and tests whether the treated and control groups differ after matching. For forest loss, the function uses a binomial GLM because the outcome is binary. For carbon emissions, it uses a Gaussian model because the outcome is continuous. The `transform_value = -1` argument is used so that the plotted direction is interpreted as avoided loss or reduced emissions.
+
+The function `make_change_plot` then converts those summaries into the displayed plots. The bars show observed average changes for control and treatment pixels, while the model estimate reports the fitted treatment-control difference.
 
 ```{r pixel-forest}
 deforest_test <- effectivenes_analysis_glm(
@@ -394,6 +423,8 @@ fig_pixel_carbon <- save_plot(
 ## Mean Pixel Analysis by Site
 
 This step repeats the post-matching analysis by mining concession site. For each treated site, the matched subclasses that contain pixels from that site are used to compare treated and control pixels.
+
+The purpose of this section is to avoid letting large sites dominate the interpretation only because they contain many pixels. First, the code identifies each treated site and the matched subclasses linked to that site. Then it reruns `effectivenes_analysis_glm` within those matched subclasses. Finally, it averages the site-level results so that the figure represents the mean pixel response by site.
 
 ```{r site-analysis}
 matched_data_site <- matched_data %>% 
@@ -646,6 +677,8 @@ fig_site_carbon <- save_plot(
 
 These histograms describe the distribution of mining concession site areas and the number of pixels represented by sites of different sizes.
 
+These plots are descriptive. They show whether the reproducible sample is dominated by small or large concessions, and whether most pixels come from a small number of large sites. This helps interpret the site-level results.
+
 ```{r site-histograms}
 area_sites <- forest_sites_data_change %>% 
   dplyr::filter(treatment == "1") %>% 
@@ -776,6 +809,8 @@ fig_hist_sites_general <- save_plot(
 ## Change by Site
 
 The final plots summarize site-level avoided forest loss and relative avoided forest loss, both overall and by site-area class.
+
+This section uses the site-level model summaries from the previous analysis. `avoid_forest_loss` reports the absolute avoided forest loss by site, while `RAD_adjusted_treatment` reports the relative avoided forest loss. The plots show both the overall distribution across mining concessions and the distribution by site-area class.
 
 ```{r change-by-site}
 forest_sites_summ_sign_change <- forest_sites_summ_sign_change %>% 
