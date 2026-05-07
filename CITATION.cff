@@ -3,6 +3,8 @@ message: "If you use this reproducible workflow, please cite it using the metada
 type: software
 title: "Deforestation analysis Peruvian Amazonia"
 authors:
+  - family-names: "Negret"
+    given-names: "Pablo"
   - name: "Wyss Academy"
 version: "1.0.0"
 date-released: "2026-05-07"

@@ -1,6 +1,6 @@
 ---
 title: "Deforestation analysis Peruvian Amazonia"
-author: "Wyss Academy"
+author: "Pablo Negret and Wyss Academy"
 output:
   github_document:
     toc: true

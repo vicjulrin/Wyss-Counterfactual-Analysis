@@ -1,7 +1,7 @@
 Deforestation analysis Peruvian Amazonia
 ========================================
 
-Wyss Academy
+Pablo Negret and Wyss Academy
 
 - [Citation And DOI](#citation-and-doi)
 - [Environment](#environment)
