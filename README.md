@@ -144,16 +144,9 @@ multicol_test <- multicol_analysis(
 
 covars_no_multicol <- multicol_test$covars_no_multicol
 
-fig_multicol <- save_plot(
-  multicol_test$multicol_dendro_plot,
-  "01_multicollinearity_dendrogram.png",
-  width = 8,
-  height = 7
-)
+multicol_test$multicol_dendro_plot
 
 ```
-
-`multicol_test$multicol_dendro_plot`
 
 ![](figures_backup/01_multicollinearity_dendrogram.png)
 
@@ -171,16 +164,9 @@ model_selection <- bestmodels_test(
 covars_better_model <- as.character(model_selection[["list_models"]][[1]]$vars)
 selected_vars <- c(col_forest_t1, covars_better_model)
 
-fig_model_selection <- save_plot(
-  model_selection$better_models_plot,
-  "02_model_selection.png",
-  width = 7,
-  height = 6
-)
+model_selection$better_models_plot
 
 ```
-
-`model_selection$better_models_plot`
 
 ![](figures_backup/02_model_selection.png)
 
@@ -207,16 +193,9 @@ moran_plot_autocor <- moran_plot(
   distances = c(600, 1000, 5000)
 )
 
-fig_moran <- save_plot(
-  moran_plot_autocor,
-  "03_spatial_autocorrelation.png",
-  width = 9,
-  height = 5
-)
+moran_plot_autocor
 
 ```
-
-`moran_plot_autocor`
 
 ![](figures_backup/03_spatial_autocorrelation.png)
 
@@ -234,27 +213,12 @@ matching_analysis <- counterfactual_function(
   caliper_test = 0.2
 )
 
-fig_balance <- save_plot(
-  matching_analysis$vars_imbalance_plot,
-  "04_matching_balance.png",
-  width = 8,
-  height = 7
-)
-
-fig_ps <- save_plot(
-  matching_analysis$ps_plot,
-  "05_propensity_scores.png",
-  width = 8,
-  height = 5
-)
+matching_analysis$vars_imbalance_plot
+matching_analysis$ps_plot
 
 ```
 
-`matching_analysis$vars_imbalance_plot`
-
 ![](figures_backup/04_matching_balance.png)
-
-`matching_analysis$ps_plot`
 
 ![](figures_backup/05_propensity_scores.png)
 
@@ -336,16 +300,9 @@ deforest_plot <- make_change_plot(
   ylab_title = "Forest change"
 )
 
-fig_pixel_forest <- save_plot(
-  deforest_plot,
-  "06_pixel_forest_change.png",
-  width = 6,
-  height = 5
-)
+deforest_plot
 
 ```
-
-`deforest_plot`
 
 ![](figures_backup/06_pixel_forest_change.png)
 
@@ -387,16 +344,9 @@ CO2emissions_plot <- make_change_plot(
   ylab_title = "Carbon emissions"
 )
 
-fig_pixel_carbon <- save_plot(
-  CO2emissions_plot,
-  "07_pixel_carbon_emissions.png",
-  width = 6,
-  height = 5
-)
+CO2emissions_plot
 
 ```
-
-`CO2emissions_plot`
 
 ![](figures_backup/07_pixel_carbon_emissions.png)
 
@@ -558,16 +508,9 @@ forest_mean_sites_plot <- make_change_plot(
   ylab_title = "Forest loss (%)"
 )
 
-fig_site_forest <- save_plot(
-  forest_mean_sites_plot,
-  "08_site_mean_forest_loss.png",
-  width = 6,
-  height = 5
-)
+forest_mean_sites_plot
 
 ```
-
-`forest_mean_sites_plot`
 
 ![](figures_backup/08_site_mean_forest_loss.png)
 
@@ -640,16 +583,9 @@ carbon_mean_sites_plot <- make_change_plot(
   ylab_title = "Carbon emissions"
 )
 
-fig_site_carbon <- save_plot(
-  carbon_mean_sites_plot,
-  "09_site_mean_carbon_emissions.png",
-  width = 6,
-  height = 5
-)
+carbon_mean_sites_plot
 
 ```
-
-`carbon_mean_sites_plot`
 
 ![](figures_backup/09_site_mean_carbon_emissions.png)
 
@@ -740,49 +676,18 @@ Hist_SitesPerArea_General <- ggplot2::ggplot(
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
 
-fig_hist_pixels_detail <- save_plot(
-  Hist_PixelsPerSiteArea_detail,
-  "10_hist_pixels_per_site_area_detail.png",
-  width = 7,
-  height = 5
-)
-
-fig_hist_pixels_general <- save_plot(
-  Hist_PixelsPerSiteArea_General,
-  "11_hist_pixels_per_site_area_general.png",
-  width = 7,
-  height = 5
-)
-
-fig_hist_sites_detail <- save_plot(
-  Hist_SitesPerArea_detail,
-  "12_hist_sites_per_area_detail.png",
-  width = 7,
-  height = 5
-)
-
-fig_hist_sites_general <- save_plot(
-  Hist_SitesPerArea_General,
-  "13_hist_sites_per_area_general.png",
-  width = 7,
-  height = 5
-)
+Hist_PixelsPerSiteArea_detail
+Hist_PixelsPerSiteArea_General
+Hist_SitesPerArea_detail
+Hist_SitesPerArea_General
 
 ```
 
-`Hist_PixelsPerSiteArea_detail`
-
 ![](figures_backup/10_hist_pixels_per_site_area_detail.png)
-
-`Hist_PixelsPerSiteArea_General`
 
 ![](figures_backup/11_hist_pixels_per_site_area_general.png)
 
-`Hist_SitesPerArea_detail`
-
 ![](figures_backup/12_hist_sites_per_area_detail.png)
-
-`Hist_SitesPerArea_General`
 
 ![](figures_backup/13_hist_sites_per_area_general.png)
 
@@ -911,27 +816,12 @@ eff_avoidDefor_sites_plot <- ggpubr::ggarrange(
   ncol = 2
 )
 
-fig_avoid_defor <- save_plot(
-  avoidDefor_sites_plot,
-  "14_avoided_forest_loss_by_site.png",
-  width = 9,
-  height = 5
-)
-
-fig_eff_avoid_defor <- save_plot(
-  eff_avoidDefor_sites_plot,
-  "15_relative_avoided_forest_loss_by_site.png",
-  width = 9,
-  height = 5
-)
+avoidDefor_sites_plot
+eff_avoidDefor_sites_plot
 
 ```
 
-`avoidDefor_sites_plot`
-
 ![](figures_backup/14_avoided_forest_loss_by_site.png)
-
-`eff_avoidDefor_sites_plot`
 
 ![](figures_backup/15_relative_avoided_forest_loss_by_site.png)
 
