@@ -8,7 +8,7 @@ authors:
     affiliation: "Wyss Academy"
   - family-names: "Rincon-Parra"
     given-names: "Victor Julio"
-version: "1.0.1"
+version: "2.0.0"
 date-released: "2026-05-08"
 license: MIT
 repository-code: "https://github.com/vicjulrin/Wyss-Counterfactual-Analysis"
