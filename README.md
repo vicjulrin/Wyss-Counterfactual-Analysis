@@ -6,6 +6,10 @@ Counterfactual workflow for deforestation analysis of area-based governance effe
 - Pablo J. Negret, Wyss Academy
 - Victor Julio Rincon-Parra
 
+This repository provides a reproducible workflow for estimating the effectiveness of area-based governance mechanisms using counterfactual matching analysis. The workflow is illustrated with a deforestation analysis in the Peruvian Amazonia, using an executable sample for one governance type: mining concessions. The workflow follows the study Potential of different area-based governance mechanisms for achieving Global Biodiversity Framework goals, available at <https://doi.org/10.21203/rs.3.rs-4170734/v1>. To obtain the complete dataset, please contact the authors.
+
+## Workflow Sections
+
 - [Environment](#environment)
 - [Inputs](#inputs)
 - [Prepare Variables](#prepare-variables)
@@ -17,9 +21,6 @@ Counterfactual workflow for deforestation analysis of area-based governance effe
 - [Mean Pixel Analysis by Site](#mean-pixel-analysis-by-site)
 - [Site Histograms](#site-histograms)
 - [Change by Site](#change-by-site)
-
-
-This repository provides a reproducible workflow for estimating the effectiveness of area-based governance mechanisms using counterfactual matching analysis. The workflow is illustrated with a deforestation analysis in the Peruvian Amazonia, using an executable sample for one governance type: mining concessions. The workflow follows the study Potential of different area-based governance mechanisms for achieving Global Biodiversity Framework goals, available at <https://doi.org/10.21203/rs.3.rs-4170734/v1>. To obtain the complete dataset, please contact the authors.
 
 The functions required to run this reproducible workflow are stored in the `functions/` folder, and the example input data are stored in the `inputs/` folder. The script keeps these functions outside the main workflow so that the analysis can be read step by step.
 
