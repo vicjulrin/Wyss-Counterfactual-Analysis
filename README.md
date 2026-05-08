@@ -1,7 +1,10 @@
-Deforestation analysis Peruvian Amazonia
-========================================
+Counterfactual workflow for deforestation analysis of area-based governance effectiveness
+=========================================================================================
 
-Victor Julio Rincon-Parra and Pablo Negret (Wyss Academy)
+**Authors**
+
+- Victor Julio Rincon-Parra, Wyss Academy
+- Pablo Negret, Wyss Academy
 
 - [Environment](#environment)
 - [Inputs](#inputs)
@@ -16,7 +19,7 @@ Victor Julio Rincon-Parra and Pablo Negret (Wyss Academy)
 - [Change by Site](#change-by-site)
 
 
-This document describes the workflow used to analyze the effectiveness of different governance types in Peru, following the study available at <https://doi.org/10.21203/rs.3.rs-4170734/v1>. The workflow is executable with a sample of the full dataset for one governance type: mining concessions. To obtain the complete dataset, please contact the authors.
+This repository provides a reproducible workflow for estimating the effectiveness of area-based governance mechanisms using counterfactual matching analysis. The workflow is illustrated with a deforestation analysis in the Peruvian Amazonia, using an executable sample for one governance type: mining concessions. The workflow follows the study Potential of different area-based governance mechanisms for achieving Global Biodiversity Framework goals, available at <https://doi.org/10.21203/rs.3.rs-4170734/v1>. To obtain the complete dataset, please contact the authors.
 
 The functions required to run this reproducible workflow are stored in the `functions/` folder, and the example input data are stored in the `inputs/` folder. The script keeps these functions outside the main workflow so that the analysis can be read step by step.
 
