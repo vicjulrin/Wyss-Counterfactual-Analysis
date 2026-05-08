@@ -1,19 +1,23 @@
 cff-version: 1.2.0
 message: "If you use this reproducible workflow, please cite it using the metadata below."
 type: software
-title: "Deforestation analysis Peruvian Amazonia"
+title: "Counterfactual analysis of area-based governance effectiveness in the Peruvian Amazonia"
 authors:
+  - family-names: "Rincon-Parra"
+    given-names: "Victor Julio"
+    affiliation: "Wyss Academy"
   - family-names: "Negret"
     given-names: "Pablo"
-  - name: "Wyss Academy"
-version: "1.0.0"
-date-released: "2026-05-07"
+    affiliation: "Wyss Academy"
+version: "1.0.1"
+date-released: "2026-05-08"
 license: MIT
 repository-code: "https://github.com/vicjulrin/Wyss-Counterfactual-Analysis"
-abstract: "Reproducible workflow for a counterfactual matching analysis of mining concessions and forest outcomes in the Peruvian Amazonia."
+abstract: "Reproducible workflow used for the counterfactual analysis of governance effectiveness in the Peruvian Amazonia for the study Potential of different area-based governance mechanisms for achieving Global Biodiversity Framework goals."
 keywords:
   - deforestation
   - counterfactual matching
   - Peru
   - Amazonia
+  - governance effectiveness
   - mining concessions
