@@ -3,12 +3,11 @@ message: "If you use this reproducible workflow, please cite it using the metada
 type: software
 title: "Counterfactual workflow for deforestation analysis of area-based governance effectiveness"
 authors:
+  - family-names: "Negret"
+    given-names: "Pablo J."
+    affiliation: "Wyss Academy"
   - family-names: "Rincon-Parra"
     given-names: "Victor Julio"
-    affiliation: "Wyss Academy"
-  - family-names: "Negret"
-    given-names: "Pablo"
-    affiliation: "Wyss Academy"
 version: "1.0.1"
 date-released: "2026-05-08"
 license: MIT

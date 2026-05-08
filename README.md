@@ -3,8 +3,8 @@ Counterfactual workflow for deforestation analysis of area-based governance effe
 
 **Authors**
 
-- Victor Julio Rincon-Parra, Wyss Academy
-- Pablo Negret, Wyss Academy
+- Pablo J. Negret, Wyss Academy
+- Victor Julio Rincon-Parra
 
 - [Environment](#environment)
 - [Inputs](#inputs)

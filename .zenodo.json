@@ -1,25 +1,24 @@
 {
-    "title":  "Counterfactual workflow for deforestation analysis of area-based governance effectiveness",
-    "creators":  [
-                     {
-                         "name":  "Rincon-Parra, Victor Julio",
-                         "affiliation":  "Wyss Academy"
-                     },
-                     {
-                         "name":  "Negret, Pablo",
-                         "affiliation":  "Wyss Academy"
-                     }
-                 ],
-    "description":  "Reproducible workflow for estimating deforestation-related effectiveness of area-based governance mechanisms using counterfactual matching analysis. The executable example illustrates the workflow with mining concessions in the Peruvian Amazonia.",
-    "license":  "MIT",
-    "keywords":  [
-                     "deforestation",
-                     "counterfactual matching",
-                     "Peru",
-                     "Amazonia",
-                     "governance effectiveness",
-                     "mining concessions"
-                 ],
-    "upload_type":  "software",
-    "access_right":  "open"
+  "title": "Counterfactual workflow for deforestation analysis of area-based governance effectiveness",
+  "creators": [
+    {
+      "name": "Negret, Pablo J.",
+      "affiliation": "Wyss Academy"
+    },
+    {
+      "name": "Rincon-Parra, Victor Julio"
+    }
+  ],
+  "description": "Reproducible workflow for estimating deforestation-related effectiveness of area-based governance mechanisms using counterfactual matching analysis. The executable example illustrates the workflow with mining concessions in the Peruvian Amazonia.",
+  "license": "MIT",
+  "keywords": [
+    "deforestation",
+    "counterfactual matching",
+    "Peru",
+    "Amazonia",
+    "governance effectiveness",
+    "mining concessions"
+  ],
+  "upload_type": "software",
+  "access_right": "open"
 }
