@@ -426,23 +426,6 @@ Hist_PixelsPerSiteArea_detail <- ggplot2::ggplot(
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
 
-Hist_PixelsPerSiteArea_General <- ggplot2::ggplot(
-  area_sites,
-  ggplot2::aes(x = area_km2, fill = term, weight = ndata)
-) +
-  ggplot2::geom_histogram(position = "identity", alpha = 0.4) +
-  ggplot2::scale_fill_manual(
-    "Governance\ntype",
-    values = hist_fill_values,
-    labels = hist_fill_labels,
-    drop = FALSE
-  ) +
-  ggplot2::ylab("Pixel count") +
-  ggplot2::xlab(expression(Area~(km^2))) +
-  ggplot2::coord_cartesian(xlim = c(1, NA)) +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
-
 Hist_SitesPerArea_detail <- ggplot2::ggplot(
   area_sites,
   ggplot2::aes(x = area_km2, fill = term)
@@ -456,23 +439,6 @@ Hist_SitesPerArea_detail <- ggplot2::ggplot(
   ) +
   ggplot2::ylab("Sites count") +
   ggplot2::xlab(expression(Area~(km^2))) +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
-
-Hist_SitesPerArea_General <- ggplot2::ggplot(
-  area_sites,
-  ggplot2::aes(x = area_km2, fill = term)
-) +
-  ggplot2::geom_histogram(position = "identity", alpha = 0.4) +
-  ggplot2::scale_fill_manual(
-    "Governance\ntype",
-    values = hist_fill_values,
-    labels = hist_fill_labels,
-    drop = FALSE
-  ) +
-  ggplot2::ylab("Sites count") +
-  ggplot2::xlab(expression(Area~(km^2))) +
-  ggplot2::coord_cartesian(xlim = c(1, NA)) +
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
 

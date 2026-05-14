@@ -596,7 +596,7 @@ carbon_mean_sites_plot
 
 ## Site Histograms
 
-These histograms describe the distribution of mining concession site areas and the number of pixels represented by sites of different sizes.
+These histograms describe the distribution of mining concession site areas using two complementary counts: the number of pixels represented by sites of different sizes and the number of sites in each area class.
 
 These plots are descriptive. They show whether the reproducible sample is dominated by small or large concessions, and whether most pixels come from a small number of large sites. This helps interpret the site-level results.
 
@@ -631,23 +631,6 @@ Hist_PixelsPerSiteArea_detail <- ggplot2::ggplot(
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
 
-Hist_PixelsPerSiteArea_General <- ggplot2::ggplot(
-  area_sites,
-  ggplot2::aes(x = area_km2, fill = term, weight = ndata)
-) +
-  ggplot2::geom_histogram(position = "identity", alpha = 0.4) +
-  ggplot2::scale_fill_manual(
-    "Governance\ntype",
-    values = hist_fill_values,
-    labels = hist_fill_labels,
-    drop = FALSE
-  ) +
-  ggplot2::ylab("Pixel count") +
-  ggplot2::xlab(expression(Area~(km^2))) +
-  ggplot2::coord_cartesian(xlim = c(1, NA)) +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
-
 Hist_SitesPerArea_detail <- ggplot2::ggplot(
   area_sites,
   ggplot2::aes(x = area_km2, fill = term)
@@ -664,37 +647,14 @@ Hist_SitesPerArea_detail <- ggplot2::ggplot(
   ggplot2::theme_minimal() +
   ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
 
-Hist_SitesPerArea_General <- ggplot2::ggplot(
-  area_sites,
-  ggplot2::aes(x = area_km2, fill = term)
-) +
-  ggplot2::geom_histogram(position = "identity", alpha = 0.4) +
-  ggplot2::scale_fill_manual(
-    "Governance\ntype",
-    values = hist_fill_values,
-    labels = hist_fill_labels,
-    drop = FALSE
-  ) +
-  ggplot2::ylab("Sites count") +
-  ggplot2::xlab(expression(Area~(km^2))) +
-  ggplot2::coord_cartesian(xlim = c(1, NA)) +
-  ggplot2::theme_minimal() +
-  ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45, hjust = 1))
-
 Hist_PixelsPerSiteArea_detail
-Hist_PixelsPerSiteArea_General
 Hist_SitesPerArea_detail
-Hist_SitesPerArea_General
 
 ```
 
 ![](figures_backup/10_hist_pixels_per_site_area_detail.png)
 
-![](figures_backup/11_hist_pixels_per_site_area_general.png)
-
 ![](figures_backup/12_hist_sites_per_area_detail.png)
-
-![](figures_backup/13_hist_sites_per_area_general.png)
 
 ## Change by Site
 
